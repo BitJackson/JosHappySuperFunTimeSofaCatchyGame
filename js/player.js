@@ -27,6 +27,33 @@
             return this._pause(this._index(key));
         },
         
+        turboTime: function(key) {
+            var index = this._index(key);
+            
+            if (this._isPlaying(index)) {
+                console.log(this.playing[index]);
+                this.playing[index].playbackRate = 1.5;
+            }
+        },
+        
+        drunkTime: function(key) {
+            var index = this._index(key);
+            
+            if (this._isPlaying(index)) {
+                console.log(this.playing[index]);
+                this.playing[index].playbackRate = 0.8;
+            }
+        },
+        
+        normalTime: function(key) {
+            var index = this._index(key);
+            
+            if (this._isPlaying(index)) {
+                console.log(this.playing[index]);
+                this.playing[index].playbackRate = 1;
+            }
+        },
+        
         fadeUp: function(key, volume) {
             var index = this._index(key);
             
