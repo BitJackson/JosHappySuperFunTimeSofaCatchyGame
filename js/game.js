@@ -5,6 +5,8 @@ var controller;
 var handPosition = 0;
 var streak = 0;
 var drunk = 0;
+var name = 'Player1';
+var health = 100;
 var frequency = 1; //Number of collidables to spawn (% probability on each tick);
 
 
@@ -15,6 +17,17 @@ var drunkModeInterval;
 //Turbo mode shit
 var isTurbo = 0;
 var turboModeInterval;
+
+
+$('#startGame').click(function() {
+	if ($('#player').val().match(/\S/)) {
+		$('#intro').toggle();
+                player.play('BACKGROUND_MUSIC', true);
+		init();
+	} else {
+		alert('You must enter a name');
+	}
+});
 
 function init() {
 	setupController();
@@ -164,11 +177,13 @@ function tick(event) {
 		collidables.splice(indicesToRemove[i],1);
 	}*/
         
-    if (streak == 20 && !isTurbo) {
+    if (streak == 10 && !isTurbo) {
+    	console.log('turning on turbo');
     	if(drunk == 10) {
     		drunk = 9;
     	}
         toasty.toastIt();
+        isTurbo = false;
         turboModeOn();
         //Fire super mode
     }

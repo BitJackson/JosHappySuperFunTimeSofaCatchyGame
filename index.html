@@ -9,9 +9,12 @@
     </head>
     <body>
 
-        <!--div id="intro">
-            <img src="assets/images/intro.png" />
-        </div-->
+        <div id="intro">
+            <span>
+                <input type="text" name="player" id="player" placeholder="Enter Your Name" /><br />
+                <a href="#" class="button" id="startGame">Start Game</a>
+            </span>
+        </div>
 
         <div id="score">
             <h1>0</h1>
@@ -44,10 +47,11 @@
         <script src="js/leaderboard.js"></script>
         <script src="js/collision.js"></script>
         <script src="js/player.js"></script>
+        <script src="js/fireworks.js"></script>
         <script src="js/turbo.js"></script>
         <script type="text/javascript">
             $(function() {
-                init();
+                //init();
                 
                 player.play('BACKGROUND_MUSIC', true);
             });
