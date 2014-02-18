@@ -286,14 +286,10 @@ function convertRange( value, r1, r2 ) {
 }
 
 function gameOver() {
+	gameOver = 1;
 	postScore();
 	getLeaderboard();
     player.stop('BACKGROUND_MUSIC');
     player.stop('TURBO_MUSIC');
     player.play('GAME_OVER');
-    gameOver = 1;
-
-    
-
-    
 }
