@@ -119,7 +119,7 @@ function tick(event) {
 		bmpAnimation.y = 0;
 
 		bmpAnimation.currentFrame = 0;
-		if(rand2 >= 60) {
+		if(rand2 >= 50) {
 			bmpAnimation.isBooze = true;
 		} else {
 			bmpAnimation.isBooze = false;
@@ -162,6 +162,7 @@ function tick(event) {
 
 				if(collidable.givesLife && health < 100) {
 					health += 5;
+					setHealth(health);
 				}
 			}
 			//console.log('collided');
