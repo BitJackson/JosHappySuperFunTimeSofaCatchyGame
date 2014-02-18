@@ -15,6 +15,9 @@ function init() {
 	createjs.Ticker.on("tick",tick);
 	createjs.Ticker.useRAF = true;
 	createjs.Ticker.setFPS(60);
+        
+        // Update stage on each tick
+        createjs.Ticket.on("tick", stage);
 }
 
 function tick(event) {
@@ -58,6 +61,4 @@ function tick(event) {
 		var collidable = collidables[i];
 		collidable.y += collidable.vY;
 	}
-
-	stage.update(event);
 }
