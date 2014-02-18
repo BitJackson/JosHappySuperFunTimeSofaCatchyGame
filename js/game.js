@@ -18,6 +18,16 @@ var drunkModeInterval;
 var isTurbo = 0;
 var turboModeInterval;
 
+
+$('#startGame').click(function() {
+	if ($('#player').val().match(/\S/)) {
+		$('#intro').toggle();
+		init();
+	} else {
+		alert('You must enter a name');
+	}
+});
+
 function init() {
 	setupController();
 
