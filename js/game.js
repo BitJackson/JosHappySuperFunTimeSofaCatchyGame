@@ -148,6 +148,7 @@ function tick(event) {
         streak = 0;
         setStreak(streak);
         toasty.toastIt();
+        turboModeOn();
         //Fire super mode
     }
 
@@ -202,8 +203,8 @@ function setupController() {
             }
         });
         
-        $('#mainCanvas').on('mousemove', function(e) {
-            handPosition = stage.mouseX - 88;
+        $(window).on('mousemove', function(e) {
+            handPosition = e.pageX - 88;
         });
 }
 
