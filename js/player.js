@@ -5,14 +5,14 @@
     var Player = function() {
         this.BACKGROUND_MUSIC = 1;
         this.INTRO_MUSAK = 2;
-        
+        this.COLLECT = 100;
         this.GAME_OVER = 200;
         
         this.sounds = {
             1: 'assets/audio/getlucky.mp3',
             2: 'assets/audio/elevator.mp3',
             // In game sounds
-            
+            100: 'assets/audio/ring.mp3',
             // Menu sounds
             200: 'assets/audio/bawk.mp3'
         };

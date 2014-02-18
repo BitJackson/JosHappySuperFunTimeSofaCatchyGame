@@ -140,7 +140,8 @@ function tick(event) {
 				hand.alpha = 1.0;
 				addPoints(500);
 				collidable.hasCollided = true;
-
+                                player.play('COLLECT');
+                                
 				if(collidable.isBooze && !isDrunk && !isTurbo) {
 					drunk++;
 					setDrunk(drunk);
