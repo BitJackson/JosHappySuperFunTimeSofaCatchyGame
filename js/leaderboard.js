@@ -10,20 +10,21 @@ function getLeaderboard() {
 		type: "GET",
 		dataType: "json",
 		success: function (data) {
-		    // console.log(data);
+		    // console.log(data);		
 		    for (index = 0; index < data.length; ++index) {
-			    $("#scoreboard").append( "<p>"+data[index].name+" - "+data[index].score+"</p>" );
+		    	console.log(data[index].name+" - "+data[index].score);
+			    // $("#scoreboard").append( "<p>"+data[index].name+" - "+data[index].score+"</p>" );
 			}
 		}
 	});
 }
 
-function postScore(name, score) {
+function postScore(name) {
 	$.ajax({
 		url: 'http://jacksonwillis.com:3000/score',
 		type: "POST",
-		dataType: "json",
-		data : "",
+		contentType: "application/json",
+		data : '{"score":"'+$("#score").text()+'","name":"'+name+'"}',
 		success: function (data) {
 		    console.log(data);
 		}
