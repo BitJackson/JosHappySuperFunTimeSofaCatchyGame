@@ -10,6 +10,11 @@ body.turbo {
     background: red;
 }
 
+#startGame {
+    -webkit-animation: pressStart .3s;
+    -webkit-animation-iteration-count: infinite;
+}
+
 #intro {
     position: absolute;
     top: 0;
@@ -202,5 +207,17 @@ body.turbo {
     }
     100% {
         -webkit-filter: invert(0%);
+    }
+}
+
+@-webkit-keyframes pressStart {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
