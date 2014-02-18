@@ -1,8 +1,12 @@
 var stage, hand;
 var delta = 5;
 var collidables = new Array();
+var controller;
+var handPosition = 0;
 
 function init() {
+	setupLeap();
+
 	stage = new createjs.Stage("mainCanvas");
         stage.canvas.width = window.innerWidth;
         stage.canvas.height = window.innerHeight;
@@ -22,17 +26,21 @@ function init() {
 }
 
 function tick(event) {
-	hand.x += delta;
 	hand.alpha = 0.3;
+
+	/*
+	hand.x += delta;
 	if(hand.x >= stage.canvas.width - 400) {
 		delta = -5;
 	}
 	if(hand.x == 100) {
 		delta = 5;
-	}
+	}*/
+
+	hand.x = handPosition;
 
 	var rand = Math.floor((Math.random()*100)+1);
-	if(rand > 95) {
+	if(rand > 98) {
 		//Create a new 'collidable object'
 		var image = new Image();
 		image.src = "assets/images/laptop.png";
@@ -68,4 +76,51 @@ function tick(event) {
 			//console.log('collided');
 		}
 	}
+}
+
+function setupLeap() {
+	/*
+	controller = new Leap.Controller({
+		enableGestures: true
+	});
+
+	controller.on('connect', function() {
+		console.log('Connected to LeapMotion');
+	});
+
+	controller.connect();
+
+	controller.on('animationFrame', function(frame) {
+	*/
+
+	var controllerOptions = {enableGestures: true};
+
+	Leap.loop(controllerOptions, function(frame) {
+	  // Body of callback function
+	  		var handString = "";
+		if (frame.hands.length > 0) {
+		  for (var i = 0; i < frame.hands.length; i++) {
+		    var hand = frame.hands[i];
+		    handPosition = convertRange(hand.palmPosition[0], [-150.0,150.0], [0,stage.canvas.width]);
+		    /*
+		    handString += "Hand ID: " + hand.id + "<br />";
+		    handString += "Direction: " + hand.direction, 2 + "<br />";
+		    handString += "Palm normal: " + vectorToString(hand.palmNormal, 2) + "<br />";
+		    handString += "Palm position: " + vectorToString(hand.palmPosition) + " mm<br />";
+		    handString += "Palm velocity: " + vectorToString(hand.palmVelocity) + " mm/s<br />";
+		    handString += "Sphere center: " + vectorToString(hand.sphereCenter) + " mm<br />";
+		    handString += "Sphere radius: " + hand.sphereRadius.toFixed(1) + " mm<br />";
+		    */
+		    //console.log('hand direction: ' + hand.direction);
+		    //console.log('palm position: ' + hand.palmPosition);
+
+		    // And so on...
+		  }
+
+		}
+	});
+}
+
+function convertRange( value, r1, r2 ) { 
+    return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
 }
