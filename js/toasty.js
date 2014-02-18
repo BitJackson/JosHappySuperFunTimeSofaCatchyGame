@@ -41,7 +41,7 @@
         },
     
         playAudio: function() {
-            player.fadeDown('BACKGROUND_MUSIC', 0.7);
+            player.fadeDown('BACKGROUND_MUSIC', 0.2);
             toasty.audio.play();
 
             setTimeout(function() {
