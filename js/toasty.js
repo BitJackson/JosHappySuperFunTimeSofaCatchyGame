@@ -2,31 +2,53 @@
     var Toasty = function() {
         this.soundFile = 'assets/audio/toasty.mp3';
         this.imageFile = 'assets/images/toasty.jpg';
-        this.audio = new Audio(this.soundFile);
-        this.image;
     };
         
     Toasty.prototype.toastIt = function() {
-        // Play audio file and display the face
-        this.image = document.createElement('img');
-        this.image.setAttribute('id', 'toasty');
-        this.image.setAttribute('src', this.imageFile);
-        document.body.appendChild(this.image);
+        toasty.audio = new Audio(this.soundFile);
         
-        setTimeout(this.playSound, 1000);
+        toasty.image = new createjs.Bitmap(this.imageFile);
+        toasty.image.x = - 100;
+        toasty.image.y = stage.canvas.height + 91;
+        stage.addChild(toasty.image);
+        
+        createjs.Ticker.on("tick", this.animateToastIn);
     };
     
+<<<<<<< HEAD
     Toasty.prototype.playSound = function() {
         //alert('test');
         this.audio.play();
         //setTimeout(this.destroyToast, 2000);
+=======
+    Toasty.prototype.animateToastIn = function(event) {
+        if (toasty.image.x >= 0) {
+            event.remove();
+            toasty.playSound();
+            
+            setTimeout(function() {
+                createjs.Ticker.on("tick", toasty.animateToastOut);
+            }, 1500);
+        } else {
+            toasty.image.x += 4;
+            toasty.image.y -= 7;
+        }
+>>>>>>> c8ff94599c94d7037a756297020e276bc1a5bcf8
     };
     
-    Toasty.prototype.destroyToast = function() {
-        this.audio.stop();
-        document.body.removeChild(this.image);
-        this.image = nill;
+    Toasty.prototype.animateToastOut = function(event) {
+        if (toasty.image.x <= -100) {
+            event.remove();
+            stage.removeChild(toasty.image);
+        } else {
+            toasty.image.x -= 2;
+            toasty.image.y += 3.5;
+        }
     };
     
-    window.Toasty = Toasty;
+    Toasty.prototype.playSound = function() {
+        this.audio.play();
+    };
+    
+    window.toasty = new Toasty();
 })();

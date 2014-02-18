@@ -1,0 +1,27 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-width: 100%;
+    max-width: 100%;
+	font-family: 'Press Start 2P', cursive;
+}
+
+h1 {
+	width: 100%;
+	text-align: center;
+	position: fixed;
+}
+
+#scoreboard {
+	width: 300px;
+	float: left;
+	background-color: #dedede;
+	min-height: 400px;
+}
+#scoreboard h3 {
+	text-align: center;
+	width: 100%;
+}
+canvas {
+	float: left;
+}
