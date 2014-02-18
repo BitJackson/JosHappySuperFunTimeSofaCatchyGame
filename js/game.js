@@ -182,8 +182,11 @@ function tick(event) {
 				collidable.hasCollided = true;
 				stage.removeChild(collidable);
 				indicesToRemove.push(i);
-				health = health - 5;
-				setHealth(health);
+				
+				if(!isTurbo) {
+					health = health - 5;
+					setHealth(health);
+				}
 
 				if(health == 0) {
 					gameOver();
