@@ -31,6 +31,17 @@ exports.findAll = function(req, res) {
         });
     });
 };
+
+exports.findAll = function(req, res) {
+    db.collection('scoreboard', function(err, collection) {
+        collection.find().toArray(function(err, items) {
+            res.set({
+                'Access-Control-Allow-Origin': '*'
+            });
+            res.send(items);
+        });
+    });
+};
  
 exports.addScore = function(req, res) {
     console.log(req.body);
