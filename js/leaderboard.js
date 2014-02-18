@@ -20,6 +20,9 @@ function setHealth(healthVal) {
 }
 
 function getLeaderboard() {
+	$("#gameover").show();
+	$("#your-name").text(name);
+	$("#your-score").text($("#score").text());
 	$.ajax({
 		url: 'http://jacksonwillis.com:3000/scores',
 		type: "GET",
@@ -27,8 +30,8 @@ function getLeaderboard() {
 		success: function (data) {
 		    // console.log(data);		
 		    for (index = 0; index < data.length; ++index) {
-		    	console.log(data[index].name+" - "+data[index].score);
-			    // $("#scoreboard").append( "<p>"+data[index].name+" - "+data[index].score+"</p>" );
+		    	// console.log(data[index].name+" - "+data[index].score);
+			    $("#scoreboard").append( "<li>"+data[index].name+" - "+data[index].score+"</li>" );
 			}
 		}
 	});
