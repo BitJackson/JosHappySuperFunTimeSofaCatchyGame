@@ -7,7 +7,7 @@ var streak = 0;
 var frequency = 1; //Number of collidables to spawn (% probability on each tick);
 
 function init() {
-	setupLeap();
+	setupController();
 
 	stage = new createjs.Stage("mainCanvas");
         stage.canvas.width = window.innerWidth;
@@ -132,22 +132,24 @@ function tick(event) {
         }
 }
 
-function setupLeap() {
+function setupController() {
+	var controllerOptions = {enableGestures: true}
+          , leapController = new Leap.Controller(controllerOptions);
 
-	var controllerOptions = {enableGestures: true};
-
-	Leap.loop(controllerOptions, function(frame) {
-		if (frame.hands.length > 0) {
-		  for (var i = 0; i < frame.hands.length; i++) {
-		    var hand = frame.hands[i];
-		    handPosition = convertRange(hand.palmPosition[0], [-150.0,150.0], [0,stage.canvas.width]);
-
-		  }
-
-		}
-	});
+        Leap.loop(controllerOptions, function(frame) {
+            if (frame.hands.length > 0) {
+              for (var i = 0; i < frame.hands.length; i++) {
+                var hand = frame.hands[i];
+                handPosition = convertRange(hand.palmPosition[0], [-150.0,150.0], [0,stage.canvas.width]);
+              }
+            }
+        });
+        
+        $('#mainCanvas').on('mousemove', function(e) {
+            handPosition = stage.mouseX - 88;
+        });
 }
 
-function convertRange( value, r1, r2 ) { 
+function convertRange( value, r1, r2 ) {
     return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
 }
