@@ -43,6 +43,7 @@ body.turbo {
     padding: 10px 25px;
     font-size: 32px;
     color: #ee0;
+    text-decoration: none;
 }
 
 #logo, #turbo {

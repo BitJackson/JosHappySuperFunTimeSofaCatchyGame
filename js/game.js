@@ -18,14 +18,20 @@ var drunkModeInterval;
 var isTurbo = 0;
 var turboModeInterval;
 
-
-$('#startGame').click(function() {
+var startGame = function() {
 	if ($('#player').val().match(/\S/)) {
 		$('#intro').toggle();
 		init();
 	} else {
 		alert('You must enter a name');
 	}
+};
+
+$('#startGame').click(startGame);
+$("#intro input").keyup(function (e) {
+    if (e.keyCode == 13) {
+        startGame();
+    }
 });
 
 function init() {
