@@ -18,10 +18,10 @@ var drunkModeInterval;
 var isTurbo = 0;
 var turboModeInterval;
 
-
 $('#startGame').click(function() {
 	if ($('#player').val().match(/\S/)) {
 		$('#intro').toggle();
+                player.stop('INTRO_MUSAK');
                 player.play('BACKGROUND_MUSIC', true);
 		init();
 	} else {
