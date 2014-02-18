@@ -6,14 +6,24 @@ html, body {
     font-family: 'Press Start 2P', cursive;
     /*background: #FFDC00;*/
 }
+body.turbo {
+    background: red;
+}
 
-#logo {
+#logo, #turbo {
     width: 100%;
     position: absolute;
     top: 50%;
-    margin-top: -50px;
     animation: showLogo 1s ease-in-out;
     -webkit-animation-fill-mode: forward;
+}
+
+#turbo {
+    top: 0; left: 0;
+    margin: 0;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    padding-top: 25%;
 }
 
 #logo h2 {
@@ -26,11 +36,16 @@ html, body {
     text-transform: lowercase;
 }
 
-#logo h1 {
+#logo h1, #turbo h1 {
     text-align: center;
     color: #4f82b4;
     text-shadow: 4px 4px 0px #fff;
     font-size: 48px;
+}
+
+#turbo h1 {
+    color: red;
+    z-index: 99;
 }
 
 #scoreboard {
@@ -50,11 +65,12 @@ html, body {
 	text-align: center;
 	width: 100%;
 }
-canvas {
-	float: left;
+#mainCanvas {
+    position: absolute;
+    left: 0;    top: 0;
 	background: url('../assets/images/sofa.png');
 	background-size: 100% 100%;
-
+    z-index: -10;
 }
 
 .bars {
@@ -90,4 +106,10 @@ canvas {
     width: 100%;
     top: 0px;
     text-align: center;  
+}
+
+#canvas-container {
+    position: absolute;
+    left: 0;    top: 0;
+    z-index: 50;
 }
