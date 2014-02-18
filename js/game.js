@@ -182,7 +182,6 @@ function tick(event) {
     		drunk = 9;
     	}
         toasty.toastIt();
-        isTurbo = false;
         turboModeOn();
         //Fire super mode
     }
