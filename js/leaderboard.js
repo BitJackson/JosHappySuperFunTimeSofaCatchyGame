@@ -34,9 +34,9 @@ function postScore(name) {
 		url: 'http://jacksonwillis.com:3000/score',
 		type: "POST",
 		contentType: "application/json",
-		data : '{"score":"'+$("#score").text()+'","name":"'+name+'"}',
+		data : '{"score":"'+$("#score").text()+'","name":"'+name+'", "health":"'+10+'", "streak":"'+10+'", "drunk":"'+10+'"}',
 		success: function (data) {
 		    console.log(data);
 		}
-	});
+	});	
 }
