@@ -12,12 +12,17 @@ function init() {
 	stage = new createjs.Stage("mainCanvas");
         stage.canvas.width = window.innerWidth;
         stage.canvas.height = window.innerHeight;
-
-	hand = new createjs.Bitmap("assets/images/hand.png");
+        
+        hand = new createjs.Bitmap("assets/images/hand.png");
 	stage.addChild(hand);
-	//hand.graphics.beginFill("black").drawRect(20,20,100,40);
-	hand.x = 20;
-	hand.y = stage.canvas.height - 150;
+        
+        window.onresize = function() {
+            console.log(window.innerHeight);
+            stage.canvas.width = window.innerWidth;
+            stage.canvas.height = window.innerHeight;
+            hand.x = 20;
+            hand.y = stage.canvas.height - 140;
+        };
 
 	createjs.Ticker.on("tick",tick);
 	createjs.Ticker.useRAF = true;
@@ -25,6 +30,8 @@ function init() {
         
         // Update stage on each tick
         createjs.Ticker.on("tick", stage);
+        
+        window.onresize();
 }
 
 function tick(event) {
