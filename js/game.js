@@ -188,18 +188,20 @@ function setupLeap() {
 }
 
 function makeDrunkModeGo() {
-	isDrunk = 1;
-	drunkModeInterval = setInterval(updateDrunkMode,1000);
+    isDrunk = 1;
+    drunkModeInterval = setInterval(updateDrunkMode,1000);
     player.drunkTime('BACKGROUND_MUSIC');
+    $('#mainCanvas').toggleClass('drunk');
 }
 
 function updateDrunkMode() {
 	drunk--;
 	setDrunk(drunk);
 	if(drunk == 0) {
-		isDrunk = 0;
-		clearInterval(drunkModeInterval);
-        player.normalTime('BACKGROUND_MUSIC');
+            isDrunk = 0;
+            clearInterval(drunkModeInterval);
+            player.normalTime('BACKGROUND_MUSIC');
+            $('#mainCanvas').toggleClass('drunk');
 	}
 }
 
