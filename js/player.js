@@ -3,10 +3,16 @@
     }
     
     var Player = function() {
-        this.BACKGROUND_MUSIC = 100;
+        this.BACKGROUND_MUSIC = 1;
+        
+        this.GAME_OVER = 200;
         
         this.sounds = {
-            100: 'assets/audio/getlucky.mp3'
+            1: 'assets/audio/getlucky.mp3',
+            // In game sounds
+            
+            // Menu sounds
+            200: 'assets/audio/bawk.mp3'
         };
         
         this.playing = {};
