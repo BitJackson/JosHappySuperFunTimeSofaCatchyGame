@@ -7,8 +7,11 @@ function addPoints(points) {
 function setStreak(streakVal) {
 	var streak = $("#streak");
 	streak.css('width',streakVal * 10 + '%');
-	streak = $("#drunk");
-	streak.css('width',streakVal * 10 + '%');
+}
+
+function setDrunk(drunkVal) {
+	var streak = $("#drunk");
+	streak.css('width',drunkVal * 10 + '%');
 }
 
 function getLeaderboard() {
