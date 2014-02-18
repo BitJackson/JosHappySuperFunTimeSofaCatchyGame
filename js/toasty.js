@@ -17,7 +17,7 @@
     };
     
     Toasty.prototype.playSound = function() {
-        alert('test');
+        //alert('test');
         this.audio.play();
         //setTimeout(this.destroyToast, 2000);
     };
