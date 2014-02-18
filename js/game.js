@@ -3,6 +3,8 @@ var delta = 5;
 var collidables = new Array();
 var controller;
 var handPosition = 0;
+var streak = 0;
+var frequency = 1; //Number of collidables to spawn (% probability on each tick);
 
 function init() {
 	setupLeap();
@@ -40,7 +42,7 @@ function tick(event) {
 	hand.x = handPosition;
 
 	var rand = Math.floor((Math.random()*100)+1);
-	if(rand > 98) {
+	if(rand > (100 - frequency)) {
 		//Create a new 'collidable object'
 		var image = new Image();
 		image.src = "assets/images/laptop.png";
@@ -54,7 +56,7 @@ function tick(event) {
 			}
 		});
 
-		var bmpAnimation = new createjs.BitmapAnimation(spriteSheet);
+		var bmpAnimation = new createjs.Sprite(spriteSheet);
 		bmpAnimation.gotoAndPlay("move");
 		bmpAnimation.direction = 180;
 		bmpAnimation.vY = 4;
@@ -66,55 +68,52 @@ function tick(event) {
 		stage.addChild(bmpAnimation);
 	}
 
+	var indicesToRemove = new Array() //Array of indices to remove from collidables
 	for (var i = 0; i < collidables.length; i++) {
 		var collidable = collidables[i];
 		collidable.y += collidable.vY;
 		collidable.rotation += 2;
 
+
 		if (ndgmr.checkPixelCollision(collidable,hand)) {
-			hand.alpha = 1.0;
+			if(!collidable.hasCollided) {
+				hand.alpha = 1.0;
+				addPoints(500);
+				collidable.hasCollided = true;
+				stage.removeChild(collidable);
+				indicesToRemove.push(i);
+				streak++;
+				setStreak(streak);
+			}
 			//console.log('collided');
 		}
+
+		if (collidable.y >= stage.canvas.height) {
+			if(!collidable.hasCollided) {
+				addPoints(-500);
+				collidable.hasCollided = true;
+				stage.removeChild(collidable);
+				indicesToRemove.push(i);
+				streak = 0;
+				setStreak(streak);
+			}	
+		}
+	}
+	for (var i = 0; i < indicesToRemove.length; i++) {
+		collidables.splice(indicesToRemove[i],1);
 	}
 }
 
 function setupLeap() {
-	/*
-	controller = new Leap.Controller({
-		enableGestures: true
-	});
-
-	controller.on('connect', function() {
-		console.log('Connected to LeapMotion');
-	});
-
-	controller.connect();
-
-	controller.on('animationFrame', function(frame) {
-	*/
 
 	var controllerOptions = {enableGestures: true};
 
 	Leap.loop(controllerOptions, function(frame) {
-	  // Body of callback function
-	  		var handString = "";
 		if (frame.hands.length > 0) {
 		  for (var i = 0; i < frame.hands.length; i++) {
 		    var hand = frame.hands[i];
 		    handPosition = convertRange(hand.palmPosition[0], [-150.0,150.0], [0,stage.canvas.width]);
-		    /*
-		    handString += "Hand ID: " + hand.id + "<br />";
-		    handString += "Direction: " + hand.direction, 2 + "<br />";
-		    handString += "Palm normal: " + vectorToString(hand.palmNormal, 2) + "<br />";
-		    handString += "Palm position: " + vectorToString(hand.palmPosition) + " mm<br />";
-		    handString += "Palm velocity: " + vectorToString(hand.palmVelocity) + " mm/s<br />";
-		    handString += "Sphere center: " + vectorToString(hand.sphereCenter) + " mm<br />";
-		    handString += "Sphere radius: " + hand.sphereRadius.toFixed(1) + " mm<br />";
-		    */
-		    //console.log('hand direction: ' + hand.direction);
-		    //console.log('palm position: ' + hand.palmPosition);
 
-		    // And so on...
 		  }
 
 		}

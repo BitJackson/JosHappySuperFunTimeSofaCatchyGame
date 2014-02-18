@@ -25,3 +25,14 @@ h1 {
 canvas {
 	float: left;
 }
+
+#streakContainer {
+	width: 100%;
+	height: 40px;
+}
+
+#streak {
+	width: 0;
+	background-color: #f00;
+	height: 100%;
+}
