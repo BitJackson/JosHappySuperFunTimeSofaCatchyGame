@@ -202,8 +202,8 @@ function setupController() {
             }
         });
         
-        $('#mainCanvas').on('mousemove', function(e) {
-            handPosition = stage.mouseX - 88;
+        $(window).on('mousemove', function(e) {
+            handPosition = e.pageX - 88;
         });
 }
 
