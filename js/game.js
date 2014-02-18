@@ -7,8 +7,9 @@ function init() {
         stage.canvas.width = window.innerWidth;
         stage.canvas.height = window.innerHeight;
 
-	hand = stage.addChild(new createjs.Shape());
-	hand.graphics.beginFill("black").drawRect(20,20,100,40);
+	hand = new createjs.Bitmap("assets/images/hand.png");
+	stage.addChild(hand);
+	//hand.graphics.beginFill("black").drawRect(20,20,100,40);
 	hand.x = 20;
 	hand.y = stage.canvas.height - 100;
 
@@ -22,8 +23,8 @@ function init() {
 
 function tick(event) {
 	hand.x += delta;
-        
-	if(hand.x >= stage.canvas.width - 200) {
+	hand.alpha = 0.3;
+	if(hand.x >= stage.canvas.width - 400) {
 		delta = -5;
 	}
 	if(hand.x == 100) {
@@ -31,7 +32,7 @@ function tick(event) {
 	}
 
 	var rand = Math.floor((Math.random()*100)+1);
-	if(rand > 99) {
+	if(rand > 95) {
 		//Create a new 'collidable object'
 		var image = new Image();
 		image.src = "assets/images/laptop.png";
@@ -49,7 +50,7 @@ function tick(event) {
 		bmpAnimation.gotoAndPlay("move");
 		bmpAnimation.direction = 180;
 		bmpAnimation.vY = 4;
-		bmpAnimation.x = Math.floor((Math.random() * 500) +1);
+		bmpAnimation.x = Math.floor((Math.random() * stage.canvas.width) +1);
 		bmpAnimation.y = 0;
 
 		bmpAnimation.currentFrame = 0;
@@ -60,5 +61,11 @@ function tick(event) {
 	for (var i = 0; i < collidables.length; i++) {
 		var collidable = collidables[i];
 		collidable.y += collidable.vY;
+		collidable.rotation += 2;
+
+		if (ndgmr.checkPixelCollision(collidable,hand)) {
+			hand.alpha = 1.0;
+			//console.log('collided');
+		}
 	}
 }

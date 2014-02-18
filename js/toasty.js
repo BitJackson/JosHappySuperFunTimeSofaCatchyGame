@@ -15,6 +15,12 @@
         createjs.Ticker.on("tick", this.animateToastIn);
     };
     
+<<<<<<< HEAD
+    Toasty.prototype.playSound = function() {
+        //alert('test');
+        this.audio.play();
+        //setTimeout(this.destroyToast, 2000);
+=======
     Toasty.prototype.animateToastIn = function(event) {
         if (toasty.image.x >= 0) {
             event.remove();
@@ -27,6 +33,7 @@
             toasty.image.x += 4;
             toasty.image.y -= 7;
         }
+>>>>>>> c8ff94599c94d7037a756297020e276bc1a5bcf8
     };
     
     Toasty.prototype.animateToastOut = function(event) {
