@@ -13,6 +13,11 @@
             <div id="streak"></div>
         </div>
         <div id="score"><h1>0</h1></div>
+        
+        <div id="logo">
+            <h2>Breakout</h2>
+            <h1>JosHappySuperFun<br>TimeSofaCatchyGame</h1>
+        </div>
 
         <canvas id="mainCanvas" width="800" height="600"></canvas>
         
@@ -28,7 +33,7 @@
             $(function() {
                 init();
                 
-                player.play('BACKGROUND_MUSIC');
+                player.play('BACKGROUND_MUSIC', true);
             });
         </script>
     </body>
