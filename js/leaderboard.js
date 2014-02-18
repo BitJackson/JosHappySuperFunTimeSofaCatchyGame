@@ -28,9 +28,11 @@ function getLeaderboard() {
 		type: "GET",
 		dataType: "json",
 		success: function (data) {
-		    // console.log(data);		
+			data.sort(function(a, b){
+			 return b.score-a.score
+			})
+
 		    for (index = 0; index < data.length; ++index) {
-		    	// console.log(data[index].name+" - "+data[index].score);
 			    $("#leaderboard").append( "<li>"+data[index].name+" - "+data[index].score+"</li>" );
 			}
 		}
@@ -44,7 +46,7 @@ function postScore() {
 		contentType: "application/json",
 		data : '{"score":"'+$("#score").text()+'","name":"'+name+'", "health":"'+10+'", "streak":"'+streak+'", "drunk":"'+drunk+'"}',
 		success: function (data) {
-		    console.log(data);
+		    getLeaderboard();
 		}
 	});	
 }

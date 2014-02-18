@@ -281,9 +281,8 @@ function convertRange( value, r1, r2 ) {
 }
 
 function gameOver() {
-    getLeaderboard();
-    gameOverVar = 1;
-    postScore();
+	gameOverVar = 1;
+	postScore();
     player.stop('BACKGROUND_MUSIC');
     player.stop('TURBO_MUSIC');
     setTimeout(function() {
