@@ -153,3 +153,9 @@ function setupController() {
 function convertRange( value, r1, r2 ) {
     return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
 }
+
+function gameOver() {
+    player.stop('BACKGROUND_MUSIC');
+    player.stop('TURBO_MUSIC');
+    player.play('GAME_OVER');
+}
