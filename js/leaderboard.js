@@ -32,8 +32,8 @@ function getLeaderboard() {
 			 return b.score-a.score
 			})
 
-		    for (index = 0; index < 16; ++index) {
-			    $("#leaderboard").append( "<li>"+data[index].name+" - "+data[index].score+"</li>" );
+		    for (index = 0; index < 40; ++index) {
+			    $("#leaderboard").append( "<li>"+data[index].name+" <span>"+data[index].score+"</span></li>" );
 			}
 		}
 	});
