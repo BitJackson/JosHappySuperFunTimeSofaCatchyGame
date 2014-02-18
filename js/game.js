@@ -17,7 +17,7 @@ function init() {
 	stage.addChild(hand);
 	//hand.graphics.beginFill("black").drawRect(20,20,100,40);
 	hand.x = 20;
-	hand.y = stage.canvas.height - 100;
+	hand.y = stage.canvas.height - 150;
 
 	createjs.Ticker.on("tick",tick);
 	createjs.Ticker.useRAF = true;
@@ -28,7 +28,6 @@ function init() {
 }
 
 function tick(event) {
-	hand.alpha = 0.3;
 
 	/*
 	hand.x += delta;
@@ -45,12 +44,28 @@ function tick(event) {
 	if(rand > (100 - frequency)) {
 		//Create a new 'collidable object'
 		var image = new Image();
-		image.src = "assets/images/laptop.png";
 
-		//This "spritesheet" only has one frame at the moment, so bodging it
+		var rand2 = Math.floor((Math.random()*100)+1);
+
+		var spriteSheet;
+
+		if(rand2 < 25) {
+			image.src = "assets/images/laptop.png";
+			imgWidth = 200;
+			imgHeight = 191;
+		} else if(rand2 >= 25 && rand2 < 50) {
+			image.src = "assets/images/gin.png";
+			imgWidth = 98;
+			imgHeight = 200;
+		} else if(rand2 >= 50) {
+			image.src = "assets/images/wine.png";
+			imgWidth = 62;
+			imgHeight = 201;
+		}
+
 		var spriteSheet = new createjs.SpriteSheet({
 			images: [image],
-			frames: {width: 150, height: 123, regX: 0, regY: 0},
+			frames: {width: imgWidth, height: imgHeight, regX: 0, regY: 0},
 			animations: {
 				move: [0, "move"]
 			}
