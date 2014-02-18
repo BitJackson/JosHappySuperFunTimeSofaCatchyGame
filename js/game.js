@@ -6,7 +6,7 @@ var handPosition = 0;
 var streak = 0;
 var drunk = 0;
 var name = 'Player1';
-var health = 100;
+var health = 25;
 var frequency = 1; //Number of collidables to spawn (% probability on each tick);
 
 
@@ -20,6 +20,7 @@ var turboModeInterval;
 
 var startGame = function() {
 	if ($('#player').val().match(/\S/)) {
+		name = $('#player').val();
 		$('#intro').toggle();
                 player.play('BACKGROUND_MUSIC', true);
 		init();
@@ -264,7 +265,7 @@ function convertRange( value, r1, r2 ) {
 }
 
 function gameOver() {
-	alert('You be dead');
+	getLeaderboard();
     player.stop('BACKGROUND_MUSIC');
     player.stop('TURBO_MUSIC');
     player.play('GAME_OVER');
