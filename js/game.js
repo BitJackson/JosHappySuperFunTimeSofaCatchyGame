@@ -24,7 +24,6 @@ function init() {
 	stage.addChild(hand);
         
         window.onresize = function() {
-            console.log(window.innerHeight);
             stage.canvas.width = window.innerWidth;
             stage.canvas.height = window.innerHeight;
             hand.x = 20;
@@ -42,17 +41,18 @@ function init() {
 }
 
 function tick(event) {
-
-	/*
-	hand.x += delta;
-	if(hand.x >= stage.canvas.width - 400) {
-		delta = -5;
-	}
-	if(hand.x == 100) {
-		delta = 5;
-	}*/
-
-	hand.x = handPosition;
+        if (isDrunk) {
+            var mid = stage.canvas.width / 2
+            if (handPosition > mid) {
+                var diff = handPosition - mid;
+                hand.x = mid - diff;
+            } else {
+                var diff = mid - handPosition;
+                hand.x = mid + diff;
+            }
+        } else {
+            hand.x = handPosition;
+        }
 
 	var rand = Math.floor((Math.random()*100)+1);
 	if(rand > (100 - frequency)) {
@@ -175,6 +175,7 @@ function setupLeap() {
 function makeDrunkModeGo() {
 	isDrunk = 1;
 	drunkModeInterval = setInterval(updateDrunkMode,1000);
+        player.drunkTime('BACKGROUND_MUSIC');
 }
 
 function updateDrunkMode() {
@@ -183,6 +184,7 @@ function updateDrunkMode() {
 	if(drunk == 0) {
 		isDrunk = 0;
 		clearInterval(drunkModeInterval);
+                player.normalTime('BACKGROUND_MUSIC');
 	}
 }
 
