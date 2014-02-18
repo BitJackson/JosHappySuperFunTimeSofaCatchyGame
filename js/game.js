@@ -4,7 +4,14 @@ var collidables = new Array();
 var controller;
 var handPosition = 0;
 var streak = 0;
+var drunk = 0;
 var frequency = 1; //Number of collidables to spawn (% probability on each tick);
+
+
+//Drunk mode shit
+var isDrunk = 0;
+var drunkModeMillisecondsLeft = 0;
+var drunkModeInterval;
 
 function init() {
 	setupController();
@@ -17,7 +24,6 @@ function init() {
 	stage.addChild(hand);
         
         window.onresize = function() {
-            console.log(window.innerHeight);
             stage.canvas.width = window.innerWidth;
             stage.canvas.height = window.innerHeight;
             hand.x = 20;
@@ -35,17 +41,18 @@ function init() {
 }
 
 function tick(event) {
-
-	/*
-	hand.x += delta;
-	if(hand.x >= stage.canvas.width - 400) {
-		delta = -5;
-	}
-	if(hand.x == 100) {
-		delta = 5;
-	}*/
-
-	hand.x = handPosition;
+        if (isDrunk) {
+            var mid = stage.canvas.width / 2
+            if (handPosition > mid) {
+                var diff = handPosition - mid;
+                hand.x = mid - diff;
+            } else {
+                var diff = mid - handPosition;
+                hand.x = mid + diff;
+            }
+        } else {
+            hand.x = handPosition;
+        }
 
 	var rand = Math.floor((Math.random()*100)+1);
 	if(rand > (100 - frequency)) {
@@ -86,6 +93,11 @@ function tick(event) {
 		bmpAnimation.y = 0;
 
 		bmpAnimation.currentFrame = 0;
+		if(rand2 >= 25) {
+			bmpAnimation.isBooze = true;
+		} else {
+			bmpAnimation.isBooze = false;
+		}
 		collidables.push(bmpAnimation);
 		stage.addChild(bmpAnimation);
 	}
@@ -102,6 +114,12 @@ function tick(event) {
 				hand.alpha = 1.0;
 				addPoints(500);
 				collidable.hasCollided = true;
+
+				if(collidable.isBooze && !isDrunk) {
+					drunk++;
+					setDrunk(drunk);
+				}
+
 				stage.removeChild(collidable);
 				indicesToRemove.push(i);
 				streak++;
@@ -125,11 +143,49 @@ function tick(event) {
 		collidables.splice(indicesToRemove[i],1);
 	}
         
-        if (streak == 10) {
-            streak = 0;
-            setStreak(streak);
-            toasty.toastIt();
-        }
+    if (streak == 10) {
+        streak = 0;
+        setStreak(streak);
+        toasty.toastIt();
+        //Fire super mode
+    }
+
+    if (drunk == 10 && !isDrunk) {
+        //drunk = 0;
+        setDrunk(drunk);
+        makeDrunkModeGo();
+        //Fire drunk mode
+    }
+}
+
+function setupLeap() {
+
+	var controllerOptions = {enableGestures: true};
+
+	Leap.loop(controllerOptions, function(frame) {
+		if (frame.hands.length > 0) {
+		  for (var i = 0; i < frame.hands.length; i++) {
+		    var hand = frame.hands[i];
+		    handPosition = convertRange(hand.palmPosition[0], [-150.0,150.0], [0,stage.canvas.width]);
+		  }
+		}
+	});
+}
+
+function makeDrunkModeGo() {
+	isDrunk = 1;
+	drunkModeInterval = setInterval(updateDrunkMode,1000);
+        player.drunkTime('BACKGROUND_MUSIC');
+}
+
+function updateDrunkMode() {
+	drunk--;
+	setDrunk(drunk);
+	if(drunk == 0) {
+		isDrunk = 0;
+		clearInterval(drunkModeInterval);
+                player.normalTime('BACKGROUND_MUSIC');
+	}
 }
 
 function setupController() {
@@ -152,4 +208,10 @@ function setupController() {
 
 function convertRange( value, r1, r2 ) {
     return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
+}
+
+function gameOver() {
+    player.stop('BACKGROUND_MUSIC');
+    player.stop('TURBO_MUSIC');
+    player.play('GAME_OVER');
 }
