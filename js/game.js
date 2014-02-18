@@ -24,7 +24,7 @@ function init() {
 function tick(event) {
 	hand.x += delta;
 	hand.alpha = 0.3;
-	if(hand.x >= stage.canvas.width - 200) {
+	if(hand.x >= stage.canvas.width - 400) {
 		delta = -5;
 	}
 	if(hand.x == 100) {
@@ -50,7 +50,7 @@ function tick(event) {
 		bmpAnimation.gotoAndPlay("move");
 		bmpAnimation.direction = 180;
 		bmpAnimation.vY = 4;
-		bmpAnimation.x = Math.floor((Math.random() * 500) +1);
+		bmpAnimation.x = Math.floor((Math.random() * stage.canvas.width) +1);
 		bmpAnimation.y = 0;
 
 		bmpAnimation.currentFrame = 0;
@@ -61,9 +61,9 @@ function tick(event) {
 	for (var i = 0; i < collidables.length; i++) {
 		var collidable = collidables[i];
 		collidable.y += collidable.vY;
+		collidable.rotation += 2;
 
-		var pt = collidable.localToLocal(50,50,hand);
-		if (hand.hitTest(pt.x, pt.y)) {
+		if (ndgmr.checkPixelCollision(collidable,hand)) {
 			hand.alpha = 1.0;
 			//console.log('collided');
 		}
