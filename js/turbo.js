@@ -17,12 +17,13 @@ function turboModeOff() {
 	frequency = 1;
 	player.normalTime('BACKGROUND_MUSIC');
 	isTurbo = 0;
+	fireworks = null;
 	clearInterval(turboModeInterval);
 }
 
 function updateTurboMode() {
 	console.log('update turbo mode: ' + streak);
-	streak--;
+	streak = streak - 2;
 	setStreak(streak);
 	if(streak == 0) {
 		turboModeOff();

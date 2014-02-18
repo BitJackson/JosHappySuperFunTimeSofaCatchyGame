@@ -164,7 +164,7 @@ function tick(event) {
 		collidables.splice(indicesToRemove[i],1);
 	}*/
         
-    if (streak == 10 && !isTurbo) {
+    if (streak == 20 && !isTurbo) {
     	if(drunk == 10) {
     		drunk = 9;
     	}

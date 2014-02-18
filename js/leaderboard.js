@@ -6,7 +6,7 @@ function addPoints(points) {
 
 function setStreak(streakVal) {
 	var streak = $("#streak");
-	streak.css('width',streakVal * 10 + '%');
+	streak.css('width',streakVal * 5 + '%');
 }
 
 function setDrunk(drunkVal) {
