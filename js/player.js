@@ -1,4 +1,7 @@
 !(function() {
+    var InvalidSoundKey = function() {
+    }
+    
     var Player = function() {
         this.BACKGROUND_MUSIC = 100;
         
@@ -11,33 +14,37 @@
     
     Player.prototype = {
         play: function(key, loop) {
-            var index = this[key];
-            
-            if (index === "undefined") {
-                return false;
-            }
-            
-            return this._start(index, loop);
+            return this._start(this._index(key), loop);
         },
         
         pause: function(key) {
-            var index = this[key];
+            return this._pause(this._index(key));
+        },
+        
+        fadeUp: function(key, volume) {
+            var index = this._index(key);
             
-            if (index === "undefined") {
-                return false;
-            }
+            this.playing[index].volume += volume;
+        },
+        
+        fadeDown: function(key, volume) {
+            var index = this._index(key);
             
-            return this._pause(index);
+            this.playing[index].volume -= volume;
         },
         
         stop: function(key) {
+            return this._stop(this._index(key));
+        },
+        
+        _index: function(key) {
             var index = this[key];
             
             if (index === "undefined") {
-                return false;
+                throw InvalidSoundKey();
             }
             
-            return this._stop(index);
+            return index;
         },
         
         _start: function(index, loop) {
