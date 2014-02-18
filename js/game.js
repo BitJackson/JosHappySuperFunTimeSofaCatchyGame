@@ -161,11 +161,11 @@ function tick(event) {
 					hand.alpha = 1.0;
 					addPoints(500);
 					collidable.hasCollided = true;
-                                        player.fadeDown('BACKGROUND_MUSIC', 0.2);
-                                        player.play('COLLECT')
-                                        setTimeout(function() {
-                                           player.fadeUp('BACKGROUND_MUSIC', 1); 
-                                        }, 800);
+                    player.fadeDown('BACKGROUND_MUSIC', 0.2);
+                    player.play('COLLECT')
+                    setTimeout(function() {
+                       player.fadeUp('BACKGROUND_MUSIC', 1); 
+                    }, 800);
 
 					if(collidable.isBooze && !isDrunk && !isTurbo) {
 						drunk++;
@@ -266,9 +266,11 @@ function updateDrunkMode() {
 	setDrunk(drunk);
 	if(drunk == 0) {
             isDrunk = 0;
+			$("#mode").hide();
             clearInterval(drunkModeInterval);
             player.normalTime('BACKGROUND_MUSIC');
             $('#mainCanvas').toggleClass('drunk');
+
 	}
 }
 
