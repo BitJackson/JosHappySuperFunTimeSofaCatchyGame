@@ -10,8 +10,11 @@ var frequency = 1; //Number of collidables to spawn (% probability on each tick)
 
 //Drunk mode shit
 var isDrunk = 0;
-var drunkModeMillisecondsLeft = 0;
 var drunkModeInterval;
+
+//Turbo mode shit
+var isTurbo = 0;
+var turboModeInterval;
 
 function init() {
 	setupController();
@@ -68,13 +71,18 @@ function tick(event) {
 			imgWidth = 200;
 			imgHeight = 191;
 		} else if(rand2 >= 25 && rand2 < 50) {
-			image.src = "assets/images/gin.png";
-			imgWidth = 98;
+			image.src = "assets/images/cat.png";
+			imgWidth = 167;
 			imgHeight = 200;
-		} else if(rand2 >= 50) {
+
+		} else if(rand2 >= 50 && rand2 < 75) {
 			image.src = "assets/images/wine.png";
 			imgWidth = 62;
 			imgHeight = 201;
+		} else {
+			image.src = "assets/images/gin.png";
+			imgWidth = 98;
+			imgHeight = 200;
 		}
 
 		var spriteSheet = new createjs.SpriteSheet({
@@ -93,7 +101,7 @@ function tick(event) {
 		bmpAnimation.y = 0;
 
 		bmpAnimation.currentFrame = 0;
-		if(rand2 >= 25) {
+		if(rand2 >= 50) {
 			bmpAnimation.isBooze = true;
 		} else {
 			bmpAnimation.isBooze = false;
@@ -115,15 +123,18 @@ function tick(event) {
 				addPoints(500);
 				collidable.hasCollided = true;
 
-				if(collidable.isBooze && !isDrunk) {
+				if(collidable.isBooze && !isDrunk && !isTurbo) {
 					drunk++;
 					setDrunk(drunk);
 				}
 
 				stage.removeChild(collidable);
 				indicesToRemove.push(i);
-				streak++;
-				setStreak(streak);
+				
+				if(!isTurbo && !isDrunk) {
+					streak++;
+					setStreak(streak);
+				}
 			}
 			//console.log('collided');
 		}
@@ -134,19 +145,23 @@ function tick(event) {
 				collidable.hasCollided = true;
 				stage.removeChild(collidable);
 				indicesToRemove.push(i);
-				streak = 0;
-				setStreak(streak);
+				
+				if(!isTurbo) {
+					streak = 0;
+					setStreak(streak);
+				}
 			}	
 		}
 	}
+
+	/*
 	for (var i = 0; i < indicesToRemove.length; i++) {
 		collidables.splice(indicesToRemove[i],1);
-	}
+	}*/
         
-    if (streak == 10) {
-        streak = 0;
-        setStreak(streak);
+    if (streak == 10 && !isTurbo) {
         toasty.toastIt();
+        turboModeOn();
         //Fire super mode
     }
 
@@ -175,7 +190,7 @@ function setupLeap() {
 function makeDrunkModeGo() {
 	isDrunk = 1;
 	drunkModeInterval = setInterval(updateDrunkMode,1000);
-        player.drunkTime('BACKGROUND_MUSIC');
+    player.drunkTime('BACKGROUND_MUSIC');
 }
 
 function updateDrunkMode() {
@@ -184,7 +199,7 @@ function updateDrunkMode() {
 	if(drunk == 0) {
 		isDrunk = 0;
 		clearInterval(drunkModeInterval);
-                player.normalTime('BACKGROUND_MUSIC');
+        player.normalTime('BACKGROUND_MUSIC');
 	}
 }
 

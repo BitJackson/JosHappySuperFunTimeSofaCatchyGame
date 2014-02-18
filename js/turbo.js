@@ -1,14 +1,32 @@
 var fireworks, fireworkInterval;
 
 function turboModeOn() {
+	isTurbo = 1;
 	$("#turbo").toggle();
 	$('body').css("background-color","black");
 	fireworks = new Fireworks();
+	frequency = 5;
+	turboModeInterval = setInterval(updateTurboMode,1000);
+	player.turboTime('BACKGROUND_MUSIC');
 }
 
 function turboModeOff() {
+	isTurbo = 0;
 	$("#turbo").toggle();
 	clearInterval(fireworkInterval);
+	frequency = 1;
+	player.normalTime('BACKGROUND_MUSIC');
+	isTurbo = 0;
+	clearInterval(turboModeInterval);
+}
+
+function updateTurboMode() {
+	console.log('update turbo mode: ' + streak);
+	streak--;
+	setStreak(streak);
+	if(streak == 0) {
+		turboModeOff();
+	}
 }
 
 
