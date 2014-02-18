@@ -15,16 +15,10 @@
         createjs.Ticker.on("tick", this.animateToastIn);
     };
     
-<<<<<<< HEAD
-    Toasty.prototype.playSound = function() {
-        //alert('test');
-        this.audio.play();
-        //setTimeout(this.destroyToast, 2000);
-=======
     Toasty.prototype.animateToastIn = function(event) {
         if (toasty.image.x >= 0) {
             event.remove();
-            toasty.playSound();
+            toasty.playAudio();
             
             setTimeout(function() {
                 createjs.Ticker.on("tick", toasty.animateToastOut);
@@ -33,7 +27,6 @@
             toasty.image.x += 4;
             toasty.image.y -= 7;
         }
->>>>>>> c8ff94599c94d7037a756297020e276bc1a5bcf8
     };
     
     Toasty.prototype.animateToastOut = function(event) {
@@ -46,9 +39,14 @@
         }
     };
     
-    Toasty.prototype.playSound = function() {
-        this.audio.play();
-    };
+    Toasty.prototype.playAudio = function() {
+        player.fadeDown('BACKGROUND_MUSIC', 5);
+        toasty.audio.play();
+        
+        setTimeout(function() {
+            player.fadeUp('BACKGROUND_MUSIC', 5);
+        }, 1000);
+    }
     
     window.toasty = new Toasty();
 })();
