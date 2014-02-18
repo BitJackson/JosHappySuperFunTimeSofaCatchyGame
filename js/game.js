@@ -8,7 +8,7 @@ var drunk = 0;
 var name = 'Player1';
 var health = 25;
 var frequency = 1; //Number of collidables to spawn (% probability on each tick);
-var gameOver = 0;
+var gameOverVar = 0;
 
 
 //Drunk mode shit
@@ -67,7 +67,7 @@ function init() {
 
 function tick(event) {
 
-	if(!gameOver) {
+	if(!gameOverVar) {
 	    if (isDrunk) {
 	        var mid = stage.canvas.width / 2
 	        if (handPosition > mid) {
@@ -189,6 +189,7 @@ function tick(event) {
 					if(!isTurbo) {
 						health = health - 5;
 						setHealth(health);
+						console.log(health);
 					}
 
 					if(health == 0) {
@@ -286,7 +287,7 @@ function convertRange( value, r1, r2 ) {
 }
 
 function gameOver() {
-	gameOver = 1;
+	gameOverVar = 1;
 	postScore();
 	getLeaderboard();
     player.stop('BACKGROUND_MUSIC');
