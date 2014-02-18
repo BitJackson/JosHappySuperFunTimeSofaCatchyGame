@@ -202,7 +202,6 @@ function tick(event) {
 					if(!isTurbo) {
 						health = health - 5;
 						setHealth(health);
-						console.log(health);
 					}
 
 					if(health == 0) {
@@ -219,7 +218,6 @@ function tick(event) {
 		}
 	        
 	    if (streak == 10 && !isTurbo) {
-	    	console.log('turning on turbo');
 	    	if(drunk == 10) {
 	    		drunk = 9;
 	    	}
