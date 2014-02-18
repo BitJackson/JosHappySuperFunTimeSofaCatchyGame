@@ -101,6 +101,12 @@ function tick(event) {
 	for (var i = 0; i < indicesToRemove.length; i++) {
 		collidables.splice(indicesToRemove[i],1);
 	}
+        
+        if (streak == 10) {
+            streak = 0;
+            setStreak(streak);
+            toasty.toastIt();
+        }
 }
 
 function setupLeap() {
