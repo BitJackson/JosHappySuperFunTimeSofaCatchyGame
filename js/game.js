@@ -5,8 +5,9 @@ var collidables = new Array();
 function init() {
 	stage = new createjs.Stage("mainCanvas");
 
-	hand = stage.addChild(new createjs.Shape());
-	hand.graphics.beginFill("black").drawRect(20,20,100,40);
+	hand = new createjs.Bitmap("assets/images/hand.png");
+	stage.addChild(hand);
+	//hand.graphics.beginFill("black").drawRect(20,20,100,40);
 	hand.x = 20;
 	hand.y = 500;
 
@@ -17,6 +18,7 @@ function init() {
 
 function tick(event) {
 	hand.x += delta;
+	hand.alpha = 0.3;
 	if(hand.x >= 700) {
 		delta = -5;
 	}
@@ -25,7 +27,7 @@ function tick(event) {
 	}
 
 	var rand = Math.floor((Math.random()*100)+1);
-	if(rand > 99) {
+	if(rand > 95) {
 		//Create a new 'collidable object'
 		var image = new Image();
 		image.src = "assets/images/laptop.png";
@@ -54,6 +56,12 @@ function tick(event) {
 	for (var i = 0; i < collidables.length; i++) {
 		var collidable = collidables[i];
 		collidable.y += collidable.vY;
+
+		var pt = collidable.localToLocal(50,50,hand);
+		if (hand.hitTest(pt.x, pt.y)) {
+			hand.alpha = 1.0;
+			//console.log('collided');
+		}
 	}
 
 	stage.update(event);
