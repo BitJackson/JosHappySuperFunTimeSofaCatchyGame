@@ -4,25 +4,30 @@ var collidables = new Array();
 
 function init() {
 	stage = new createjs.Stage("mainCanvas");
+        stage.canvas.width = window.innerWidth;
+        stage.canvas.height = window.innerHeight;
 
 	hand = new createjs.Bitmap("assets/images/hand.png");
 	stage.addChild(hand);
 	//hand.graphics.beginFill("black").drawRect(20,20,100,40);
 	hand.x = 20;
-	hand.y = 500;
+	hand.y = stage.canvas.height - 100;
 
 	createjs.Ticker.on("tick",tick);
 	createjs.Ticker.useRAF = true;
 	createjs.Ticker.setFPS(60);
+        
+        // Update stage on each tick
+        createjs.Ticker.on("tick", stage);
 }
 
 function tick(event) {
 	hand.x += delta;
 	hand.alpha = 0.3;
-	if(hand.x >= 700) {
+	if(hand.x >= stage.canvas.width - 200) {
 		delta = -5;
 	}
-	if(hand.x == 0) {
+	if(hand.x == 100) {
 		delta = 5;
 	}
 
@@ -63,6 +68,4 @@ function tick(event) {
 			//console.log('collided');
 		}
 	}
-
-	stage.update(event);
 }
