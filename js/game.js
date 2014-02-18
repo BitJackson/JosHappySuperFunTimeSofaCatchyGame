@@ -17,7 +17,7 @@ function init() {
 	stage.addChild(hand);
 	//hand.graphics.beginFill("black").drawRect(20,20,100,40);
 	hand.x = 20;
-	hand.y = stage.canvas.height - 100;
+	hand.y = stage.canvas.height - 150;
 
 	createjs.Ticker.on("tick",tick);
 	createjs.Ticker.useRAF = true;
@@ -28,7 +28,6 @@ function init() {
 }
 
 function tick(event) {
-	hand.alpha = 0.3;
 
 	/*
 	hand.x += delta;
