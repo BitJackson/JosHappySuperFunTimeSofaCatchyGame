@@ -4,7 +4,14 @@ var collidables = new Array();
 var controller;
 var handPosition = 0;
 var streak = 0;
+var drunk = 0;
 var frequency = 1; //Number of collidables to spawn (% probability on each tick);
+
+
+//Drunk mode shit
+var isDrunk = 0;
+var drunkModeMillisecondsLeft = 0;
+var drunkModeInterval;
 
 function init() {
 	setupController();
@@ -86,6 +93,11 @@ function tick(event) {
 		bmpAnimation.y = 0;
 
 		bmpAnimation.currentFrame = 0;
+		if(rand2 >= 25) {
+			bmpAnimation.isBooze = true;
+		} else {
+			bmpAnimation.isBooze = false;
+		}
 		collidables.push(bmpAnimation);
 		stage.addChild(bmpAnimation);
 	}
@@ -102,6 +114,12 @@ function tick(event) {
 				hand.alpha = 1.0;
 				addPoints(500);
 				collidable.hasCollided = true;
+
+				if(collidable.isBooze && !isDrunk) {
+					drunk++;
+					setDrunk(drunk);
+				}
+
 				stage.removeChild(collidable);
 				indicesToRemove.push(i);
 				streak++;
@@ -125,11 +143,47 @@ function tick(event) {
 		collidables.splice(indicesToRemove[i],1);
 	}
         
-        if (streak == 10) {
-            streak = 0;
-            setStreak(streak);
-            toasty.toastIt();
-        }
+    if (streak == 10) {
+        streak = 0;
+        setStreak(streak);
+        toasty.toastIt();
+        //Fire super mode
+    }
+
+    if (drunk == 10 && !isDrunk) {
+        //drunk = 0;
+        setDrunk(drunk);
+        makeDrunkModeGo();
+        //Fire drunk mode
+    }
+}
+
+function setupLeap() {
+
+	var controllerOptions = {enableGestures: true};
+
+	Leap.loop(controllerOptions, function(frame) {
+		if (frame.hands.length > 0) {
+		  for (var i = 0; i < frame.hands.length; i++) {
+		    var hand = frame.hands[i];
+		    handPosition = convertRange(hand.palmPosition[0], [-150.0,150.0], [0,stage.canvas.width]);
+		  }
+		}
+	});
+}
+
+function makeDrunkModeGo() {
+	isDrunk = 1;
+	drunkModeInterval = setInterval(updateDrunkMode,1000);
+}
+
+function updateDrunkMode() {
+	drunk--;
+	setDrunk(drunk);
+	if(drunk == 0) {
+		isDrunk = 0;
+		clearInterval(drunkModeInterval);
+	}
 }
 
 function setupController() {
