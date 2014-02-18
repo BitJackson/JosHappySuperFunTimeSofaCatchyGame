@@ -32,7 +32,7 @@ function getLeaderboard() {
 			 return b.score-a.score
 			})
 
-		    for (index = 0; index < 10; ++index) {
+		    for (index = 0; index < 16; ++index) {
 			    $("#leaderboard").append( "<li>"+data[index].name+" - "+data[index].score+"</li>" );
 			}
 		}
