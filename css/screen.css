@@ -4,7 +4,7 @@ html, body {
     min-width: 100%;
     max-width: 100%;
     font-family: 'Press Start 2P', cursive;
-    /*background: #FFDC00;*/
+    background: #000;
 }
 body.turbo {
     background: red;
@@ -62,28 +62,40 @@ body.turbo {
 }
 
 #scoreboard {
-	width: 300px;
-	float: left;
-	background-color: #dedede;
-	min-height: 400px;
+    width: 300px;
+    float: left;
+    background-color: #dedede;
+    min-height: 400px;
 }
 
 #scoreboard h1 {
-	width: 100%;
-	text-align: center;
-	position: fixed;
+    width: 100%;
+    text-align: center;
+    position: fixed;
 }
 
 #scoreboard h3 {
-	text-align: center;
-	width: 100%;
+    text-align: center;
+    width: 100%;
 }
+
 #mainCanvas {
     position: absolute;
     left: 0;    top: 0;
-	background: url('../assets/images/sofa.png');
-	background-size: 100% 100%;
+    background: url('../assets/images/sofa.png');
+    background-size: 100% 100%;
     z-index: -10;
+}
+
+#mainCanvas.turbo {
+    -webkit-animation: turbo .1s;
+    -webkit-animation-iteration-count: infinite;
+}
+
+#mainCanvas.drunk {
+    -webkit-filter: invert(100%);  
+    -webkit-animation: drunk 10s ease-in-out;
+    -webkit-animation-iteration-count: infinite;
 }
 
 .bars {
@@ -91,10 +103,10 @@ body.turbo {
 }
 
 #streakContainer, #drunkContainer {
-	width: 35%;
+    width: 35%;
     margin: 0 5%;
-	height: 40px;
-	position: absolute;
+    height: 40px;
+    position: absolute;
     top: 10px;
     border: 2px solid #000;
 }
@@ -109,13 +121,13 @@ body.turbo {
 } 
 
 #drunk {
-	width: 0;
-	background-color: #00f;
-	height: 100%;
+    width: 0;
+    background-color: #00f;
+    height: 100%;
 }
 
 #score {
-	position: absolute;
+    position: absolute;
     width: 100%;
     top: 0px;
     text-align: center;  
@@ -123,6 +135,37 @@ body.turbo {
 
 #canvas-container {
     position: absolute;
-    left: 0;    top: 0;
+    left: 0;
+    top: 0;
     z-index: 50;
+}
+
+@-webkit-keyframes drunk {
+    0% {
+        -webkit-transform: skew(0deg, 0deg);
+    }
+    25% {
+        -webkit-transform: skew(2deg, 2deg);
+    }
+    50% {
+        -webkit-transform: skew(0deg, 0deg);
+    }
+    75% {
+        -webkit-transform: skew(-2deg, -2deg);
+    }
+    100% {
+        -webkit-transform: skew(0deg, 0deg);
+    }
+}
+
+@-webkit-keyframes turbo {
+    0% {
+        -webkit-filter: invert(0%);
+    }
+    50% {
+        -webkit-filter: invert(100%);
+    }
+    100% {
+        -webkit-filter: invert(0%);
+    }
 }
