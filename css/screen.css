@@ -125,9 +125,22 @@ body.turbo {
     width: 100%;
 }
 
+#healthContainer {
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	height: 15px;
+}
+
+#health {
+	width: 100%;
+	background-color: #f00;
+	height: 100%;
+}
+
 #streakContainer, #drunkContainer {
     width: 35%;
-    margin: 0 5%;
+    margin: 10px 5%;
     height: 40px;
     position: absolute;
     top: 10px;

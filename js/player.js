@@ -31,7 +31,6 @@
             var index = this._index(key);
             
             if (this._isPlaying(index)) {
-                console.log(this.playing[index]);
                 this.playing[index].playbackRate = 1.5;
             }
         },
@@ -40,7 +39,6 @@
             var index = this._index(key);
             
             if (this._isPlaying(index)) {
-                console.log(this.playing[index]);
                 this.playing[index].playbackRate = 0.8;
             }
         },
@@ -49,7 +47,6 @@
             var index = this._index(key);
             
             if (this._isPlaying(index)) {
-                console.log(this.playing[index]);
                 this.playing[index].playbackRate = 1;
             }
         },

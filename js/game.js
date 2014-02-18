@@ -21,6 +21,7 @@ var turboModeInterval;
 var startGame = function() {
 	if ($('#player').val().match(/\S/)) {
 		$('#intro').toggle();
+                player.play('BACKGROUND_MUSIC', true);
 		init();
 	} else {
 		alert('You must enter a name');
@@ -168,12 +169,19 @@ function tick(event) {
 				collidable.hasCollided = true;
 				stage.removeChild(collidable);
 				indicesToRemove.push(i);
+				health = health - 5;
+				setHealth(health);
+
+				if(health == 0) {
+					gameOver();
+					return;
+				}
 				
 				if(!isTurbo) {
 					streak = 0;
 					setStreak(streak);
 				}
-			}	
+			}
 		}
 	}
 
@@ -183,6 +191,7 @@ function tick(event) {
 	}*/
         
     if (streak == 10 && !isTurbo) {
+    	console.log('turning on turbo');
     	if(drunk == 10) {
     		drunk = 9;
     	}
@@ -198,6 +207,7 @@ function tick(event) {
         //Fire drunk mode
     }
 }
+
 
 function setupLeap() {
 
@@ -254,6 +264,7 @@ function convertRange( value, r1, r2 ) {
 }
 
 function gameOver() {
+	alert('You be dead');
     player.stop('BACKGROUND_MUSIC');
     player.stop('TURBO_MUSIC');
     player.play('GAME_OVER');

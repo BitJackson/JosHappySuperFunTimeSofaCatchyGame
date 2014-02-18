@@ -1,3 +1,175 @@
+/*=============================================================================*/	
+/* GUI
+/*=============================================================================*/	
+var guiPresets = {
+    "preset": "Default",
+    "remembered": {
+          "Default": {
+            "0": {
+                  "fworkSpeed": 2,
+                  "fworkAccel": 4,
+                  "showShockwave": false,
+                  "showTarget": true,
+                  "partCount": 30,
+                  "partSpeed": 5,
+                  "partSpeedVariance": 10,
+                  "partWind": 50,
+                  "partFriction": 5,
+                  "partGravity": 1,
+                  "flickerDensity": 20,
+                  "hueMin": 150,
+                  "hueMax": 200,
+                  "hueVariance": 30,
+                  "lineWidth": 1,
+                  "clearAlpha": 25
+            }
+          },
+          "Anti Gravity": {
+            "0": {
+                  "fworkSpeed": 4,
+                  "fworkAccel": 10,
+                  "showShockwave": true,
+                  "showTarget": false,
+                  "partCount": 150,
+                  "partSpeed": 5,
+                  "partSpeedVariance": 10,
+                  "partWind": 10,
+                  "partFriction": 10,
+                  "partGravity": -10,
+                  "flickerDensity": 30,
+                  "hueMin": 0,
+                  "hueMax": 360,
+                  "hueVariance": 30,
+                  "lineWidth": 1,
+                  "clearAlpha": 50
+            }
+          },
+          "Battle Field": {
+            "0": {
+                  "fworkSpeed": 10,
+                  "fworkAccel": 20,
+                  "showShockwave": true,
+                  "showTarget": true,
+                  "partCount": 200,
+                  "partSpeed": 30,
+                  "partSpeedVariance": 5,
+                  "partWind": 0,
+                  "partFriction": 5,
+                  "partGravity": 0,
+                  "flickerDensity": 0,
+                  "hueMin": 20,
+                  "hueMax": 30,
+                  "hueVariance": 10,
+                  "lineWidth": 1,
+                  "clearAlpha": 40
+            }
+          },
+          "Mega Blast": {
+            "0": {
+                  "fworkSpeed": 3,
+                  "fworkAccel": 3,
+                  "showShockwave": true,
+                  "showTarget": true,
+                  "partCount": 500,
+                  "partSpeed": 50,
+                  "partSpeedVariance": 5,
+                  "partWind": 0,
+                  "partFriction": 0,
+                  "partGravity": 0,
+                  "flickerDensity": 0,
+                  "hueMin": 0,
+                  "hueMax": 360,
+                  "hueVariance": 30,
+                  "lineWidth": 20,
+                  "clearAlpha": 20
+            }
+          },
+          "Nimble": {
+            "0": {
+                  "fworkSpeed": 10,
+                  "fworkAccel": 50,
+                  "showShockwave": false,
+                  "showTarget": false,
+                  "partCount": 120,
+                  "partSpeed": 10,
+                  "partSpeedVariance": 10,
+                  "partWind": 100,
+                  "partFriction": 50,
+                  "partGravity": 0,
+                  "flickerDensity": 20,
+                  "hueMin": 0,
+                  "hueMax": 360,
+                  "hueVariance": 30,
+                  "lineWidth": 1,
+                  "clearAlpha": 80
+            }
+          },
+          "Slow Launch": {
+            "0": {
+                  "fworkSpeed": 2,
+                  "fworkAccel": 2,
+                  "showShockwave": false,
+                  "showTarget": false,
+                  "partCount": 200,
+                  "partSpeed": 10,
+                  "partSpeedVariance": 0,
+                  "partWind": 100,
+                  "partFriction": 0,
+                  "partGravity": 2,
+                  "flickerDensity": 50,
+                  "hueMin": 0,
+                  "hueMax": 360,
+                  "hueVariance": 20,
+                  "lineWidth": 4,
+                  "clearAlpha": 10
+            }
+          },
+          "Perma Trail": {
+            "0": {
+                  "fworkSpeed": 4,
+                  "fworkAccel": 10,
+                  "showShockwave": false,
+                  "showTarget": false,
+                  "partCount": 150,
+                  "partSpeed": 10,
+                  "partSpeedVariance": 10,
+                  "partWind": 100,
+                  "partFriction": 3,
+                  "partGravity": 0,
+                  "flickerDensity": 0,
+                  "hueMin": 0,
+                  "hueMax": 360,
+                  "hueVariance": 20,
+                  "lineWidth": 1,
+                  "clearAlpha": 0
+            }
+          }
+    },
+    "closed": true,
+    "folders": {
+          "Fireworks": {
+            "preset": "Default",
+            "closed": false,
+            "folders": {}
+          },
+          "Particles": {
+            "preset": "Default",
+            "closed": true,
+            "folders": {}
+          },
+          "Color": {
+            "preset": "Default",
+            "closed": true,
+            "folders": {}
+          },
+          "Other": {
+            "preset": "Default",
+            "closed": true,
+            "folders": {}
+          }
+    }
+};
+
 var Fireworks = function(){
 	/*=============================================================================*/	
 	/* Utility
@@ -379,183 +551,13 @@ var Fireworks = function(){
 		self.updateFireworks();
 		self.updateParticles();
 		self.drawFireworks();			
-		self.drawParticles();			
+		self.drawParticles();
+                
+                clearInterval(fireworkInterval);
+                
+                fireworkInterval = setInterval(function(){
+                    self.fireworks.push(new Firework(self.cw/2, self.ch, rand(50, self.cw-50), rand(50, self.ch/2)-50));
+                }, 25);
 	};
-  
-	fireworkInterval = setInterval(function(){
- 		self.fireworks.push(new Firework(self.cw/2, self.ch, rand(50, self.cw-50), rand(50, self.ch/2)-50));
-    }, 25);
 
 }
-
-/*=============================================================================*/	
-/* GUI
-/*=============================================================================*/	
-var guiPresets = {
-			  "preset": "Default",
-			  "remembered": {
-				"Default": {
-				  "0": {
-					"fworkSpeed": 2,
-					"fworkAccel": 4,
-					"showShockwave": false,
-					"showTarget": true,
-					"partCount": 30,
-					"partSpeed": 5,
-					"partSpeedVariance": 10,
-					"partWind": 50,
-					"partFriction": 5,
-					"partGravity": 1,
-					"flickerDensity": 20,
-					"hueMin": 150,
-					"hueMax": 200,
-					"hueVariance": 30,
-					"lineWidth": 1,
-					"clearAlpha": 25
-				  }
-				},
-				"Anti Gravity": {
-				  "0": {
-					"fworkSpeed": 4,
-					"fworkAccel": 10,
-					"showShockwave": true,
-					"showTarget": false,
-					"partCount": 150,
-					"partSpeed": 5,
-					"partSpeedVariance": 10,
-					"partWind": 10,
-					"partFriction": 10,
-					"partGravity": -10,
-					"flickerDensity": 30,
-					"hueMin": 0,
-					"hueMax": 360,
-					"hueVariance": 30,
-					"lineWidth": 1,
-					"clearAlpha": 50
-				  }
-				},
-				"Battle Field": {
-				  "0": {
-					"fworkSpeed": 10,
-					"fworkAccel": 20,
-					"showShockwave": true,
-					"showTarget": true,
-					"partCount": 200,
-					"partSpeed": 30,
-					"partSpeedVariance": 5,
-					"partWind": 0,
-					"partFriction": 5,
-					"partGravity": 0,
-					"flickerDensity": 0,
-					"hueMin": 20,
-					"hueMax": 30,
-					"hueVariance": 10,
-					"lineWidth": 1,
-					"clearAlpha": 40
-				  }
-				},
-				"Mega Blast": {
-				  "0": {
-					"fworkSpeed": 3,
-					"fworkAccel": 3,
-					"showShockwave": true,
-					"showTarget": true,
-					"partCount": 500,
-					"partSpeed": 50,
-					"partSpeedVariance": 5,
-					"partWind": 0,
-					"partFriction": 0,
-					"partGravity": 0,
-					"flickerDensity": 0,
-					"hueMin": 0,
-					"hueMax": 360,
-					"hueVariance": 30,
-					"lineWidth": 20,
-					"clearAlpha": 20
-				  }
-				},
-				"Nimble": {
-				  "0": {
-					"fworkSpeed": 10,
-					"fworkAccel": 50,
-					"showShockwave": false,
-					"showTarget": false,
-					"partCount": 120,
-					"partSpeed": 10,
-					"partSpeedVariance": 10,
-					"partWind": 100,
-					"partFriction": 50,
-					"partGravity": 0,
-					"flickerDensity": 20,
-					"hueMin": 0,
-					"hueMax": 360,
-					"hueVariance": 30,
-					"lineWidth": 1,
-					"clearAlpha": 80
-				  }
-				},
-				"Slow Launch": {
-				  "0": {
-					"fworkSpeed": 2,
-					"fworkAccel": 2,
-					"showShockwave": false,
-					"showTarget": false,
-					"partCount": 200,
-					"partSpeed": 10,
-					"partSpeedVariance": 0,
-					"partWind": 100,
-					"partFriction": 0,
-					"partGravity": 2,
-					"flickerDensity": 50,
-					"hueMin": 0,
-					"hueMax": 360,
-					"hueVariance": 20,
-					"lineWidth": 4,
-					"clearAlpha": 10
-				  }
-				},
-				"Perma Trail": {
-				  "0": {
-					"fworkSpeed": 4,
-					"fworkAccel": 10,
-					"showShockwave": false,
-					"showTarget": false,
-					"partCount": 150,
-					"partSpeed": 10,
-					"partSpeedVariance": 10,
-					"partWind": 100,
-					"partFriction": 3,
-					"partGravity": 0,
-					"flickerDensity": 0,
-					"hueMin": 0,
-					"hueMax": 360,
-					"hueVariance": 20,
-					"lineWidth": 1,
-					"clearAlpha": 0
-				  }
-				}
-			  },
-			  "closed": true,
-			  "folders": {
-				"Fireworks": {
-				  "preset": "Default",
-				  "closed": false,
-				  "folders": {}
-				},
-				"Particles": {
-				  "preset": "Default",
-				  "closed": true,
-				  "folders": {}
-				},
-				"Color": {
-				  "preset": "Default",
-				  "closed": true,
-				  "folders": {}
-				},
-				"Other": {
-				  "preset": "Default",
-				  "closed": true,
-				  "folders": {}
-				}
-			  }
-			};
