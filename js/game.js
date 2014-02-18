@@ -4,11 +4,13 @@ var collidables = new Array();
 
 function init() {
 	stage = new createjs.Stage("mainCanvas");
+        stage.canvas.width = window.innerWidth;
+        stage.canvas.height = window.innerHeight;
 
 	hand = stage.addChild(new createjs.Shape());
 	hand.graphics.beginFill("black").drawRect(20,20,100,40);
 	hand.x = 20;
-	hand.y = 500;
+	hand.y = stage.canvas.height - 100;
 
 	createjs.Ticker.on("tick",tick);
 	createjs.Ticker.useRAF = true;
@@ -17,10 +19,11 @@ function init() {
 
 function tick(event) {
 	hand.x += delta;
-	if(hand.x >= 700) {
+        
+	if(hand.x >= stage.canvas.width - 200) {
 		delta = -5;
 	}
-	if(hand.x == 0) {
+	if(hand.x == 100) {
 		delta = 5;
 	}
 
