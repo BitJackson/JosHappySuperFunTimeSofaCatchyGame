@@ -17,7 +17,7 @@ function init() {
 	createjs.Ticker.setFPS(60);
         
         // Update stage on each tick
-        createjs.Ticket.on("tick", stage);
+        createjs.Ticker.on("tick", stage);
 }
 
 function tick(event) {
