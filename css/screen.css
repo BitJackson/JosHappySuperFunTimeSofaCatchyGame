@@ -186,6 +186,16 @@ body.turbo {
     border: 2px solid #000;
 }
 
+#healthContainer .icon {
+    position: absolute;
+    background-image: url(../assets/images/icon-health.png);
+    background-size: cover;
+    width: 45px;
+    height: 44px;
+    left: -25px;
+    top: -2px;
+}
+
 #streakContainer {
     width: 100%;
     position: absolute;
@@ -212,6 +222,21 @@ body.turbo {
     top: 10px;
     border: 2px solid #000;
 }
+
+#drunkContainer .icon-wrapper {
+    position: relative;
+}
+
+#drunkContainer .icon {
+    position: absolute;
+    width: 45px;
+    height: 44px;
+    left: -22px;
+    top: -2px;
+    background-image: url(../assets/images/icon-booze.png);
+    background-size: cover;
+}
+
 #drunkContainer {
     margin-left: 60%;
 }
