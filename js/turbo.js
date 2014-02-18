@@ -6,6 +6,7 @@ function turboModeOn() {
 	turboModeInterval = setInterval(updateTurboMode,1000);
 	player.turboTime('BACKGROUND_MUSIC');
         $('#mainCanvas').addClass('turbo');
+    $("#health").addClass('turbo');
 }
 
 function turboModeOff() {
@@ -17,6 +18,8 @@ function turboModeOff() {
 	fireworks = null;
 	clearInterval(turboModeInterval);
         $('#mainCanvas').removeClass('turbo');
+    $("#health").removeClass('turbo');
+
 }
 
 function updateTurboMode() {
