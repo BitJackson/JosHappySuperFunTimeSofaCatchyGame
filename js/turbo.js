@@ -4,6 +4,20 @@ function turboModeOn() {
 	$("#turbo").toggle();
 	$('body').css("background-color","black");
 	fireworks = new Fireworks();
+	
+	drunkModeInterval = setInterval(updateDrunkMode,1000);
+        player.drunkTime('BACKGROUND_MUSIC');
+}
+
+function updateDrunkMode() {
+	drunk--;
+	setDrunk(drunk);
+	if(drunk == 0) {
+		isDrunk = 0;
+		clearInterval(drunkModeInterval);
+                player.normalTime('BACKGROUND_MUSIC');
+	}
+}
 }
 
 function turboModeOff() {
