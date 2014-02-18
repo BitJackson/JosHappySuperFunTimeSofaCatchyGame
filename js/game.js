@@ -14,7 +14,7 @@ var frequency = 1; //Number of collidables to spawn (% probability on each tick)
 var isDrunk = 0;
 var drunkModeInterval;
 
-//Turbo mode shit
+//Turbo mode shit0
 var isTurbo = 0;
 var turboModeInterval;
 
@@ -54,7 +54,7 @@ function init() {
             hand.y = stage.canvas.height - 140;
         };
 
-	createjs.Ticker.on("tick",tick);
+	createjs.Ticker.on("tick", tick);
 	createjs.Ticker.useRAF = true;
 	createjs.Ticker.setFPS(60);
         
@@ -178,6 +178,11 @@ function tick(event) {
 
 		if (collidable.y >= stage.canvas.height) {
 			if(!collidable.hasCollided) {
+                                player.fadeDown('BACKGROUND_MUSIC', 0.2);
+                                player.play('MISS')
+                                setTimeout(function() {
+                                    player.fadeUp('BACKGROUND_MUSIC', 1);
+                                }, 1000);
 				addPoints(-500);
 				collidable.hasCollided = true;
 				stage.removeChild(collidable);
@@ -197,11 +202,6 @@ function tick(event) {
 			}
 		}
 	}
-
-	/*
-	for (var i = 0; i < indicesToRemove.length; i++) {
-		collidables.splice(indicesToRemove[i],1);
-	}*/
         
     if (streak == 10 && !isTurbo) {
     	console.log('turning on turbo');
@@ -277,7 +277,7 @@ function convertRange( value, r1, r2 ) {
 }
 
 function gameOver() {
-	getLeaderboard();
+    getLeaderboard();
     player.stop('BACKGROUND_MUSIC');
     player.stop('TURBO_MUSIC');
     player.play('GAME_OVER');

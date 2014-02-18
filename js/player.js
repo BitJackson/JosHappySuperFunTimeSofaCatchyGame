@@ -6,6 +6,7 @@
         this.BACKGROUND_MUSIC = 1;
         this.INTRO_MUSAK = 2;
         this.COLLECT = 100;
+        this.MISS = 101;
         this.GAME_OVER = 200;
         
         this.sounds = {
@@ -13,8 +14,9 @@
             2: 'assets/audio/elevator.mp3',
             // In game sounds
             100: 'assets/audio/ring.mp3',
+            101: 'assets/audio/miss.mp3',
             // Menu sounds
-            200: 'assets/audio/bawk.mp3'
+            200: 'assets/audio/livving-here.mp3'
         };
         
         this.playing = {};
@@ -56,13 +58,13 @@
         fadeUp: function(key, volume) {
             var index = this._index(key);
             
-            this.playing[index].volume += volume;
+            this.playing[index].volume = volume;
         },
         
         fadeDown: function(key, volume) {
             var index = this._index(key);
             
-            this.playing[index].volume -= volume;
+            this.playing[index].volume = volume;
         },
         
         stop: function(key) {
