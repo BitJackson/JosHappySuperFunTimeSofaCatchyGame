@@ -6,7 +6,7 @@ var handPosition = 0;
 var streak = 0;
 var drunk = 0;
 var name = 'Player1';
-var health = 25;
+var health = 100;
 var frequency = 1; //Number of collidables to spawn (% probability on each tick);
 var gameOverVar = 0;
 
@@ -245,6 +245,8 @@ function makeDrunkModeGo() {
     drunkModeInterval = setInterval(updateDrunkMode,1000);
     player.drunkTime('BACKGROUND_MUSIC');
     $('#mainCanvas').toggleClass('drunk');
+    $("#mode h1").text('DRUNK MOAD');
+	$("#mode").show();
 }
 
 function updateDrunkMode() {

@@ -1,6 +1,7 @@
 function turboModeOn() {
 	isTurbo = 1;
-	$("#turbo").show();
+	$("#mode h1").text('TURBO MOAD');
+	$("#mode").show();
 	$('body').css("background-color","black");
 	frequency = 5;
 	turboModeInterval = setInterval(updateTurboMode,1000);
@@ -11,7 +12,7 @@ function turboModeOn() {
 
 function turboModeOff() {
 	isTurbo = 0;
-	$("#turbo").hide();
+	$("#mode").hide();
 	frequency = 1;
 	player.normalTime('BACKGROUND_MUSIC');
 	isTurbo = 0;
