@@ -147,6 +147,7 @@ function tick(event) {
         streak = 0;
         setStreak(streak);
         toasty.toastIt();
+        turboModeOn();
         //Fire super mode
     }
 
