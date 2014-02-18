@@ -1,18 +1,23 @@
+var fireworks, fireworkInterval;
+
 function turboModeOn() {
 	$("#turbo").toggle();
 	$('body').css("background-color","black");
-	var fworks = new Fireworks();
+	fireworks = new Fireworks();
 }
 
 function turboModeOff() {
 	$("#turbo").toggle();
+	clearInterval(fireworkInterval);
 }
+
 
 var Fireworks = function(){
 	/*=============================================================================*/	
 	/* Utility
 	/*=============================================================================*/
 	var self = this;
+	var stopped = false;
 	var rand = function(rMi, rMa){return ~~((Math.random()*(rMa-rMi+1))+rMi);}
 	var hitTest = function(x1, y1, w1, h1, x2, y2, w2, h2){return !(x1 + w1 < x2 || x2 + w2 < x1 || y1 + h1 < y2 || y2 + h2 < y1);};
 	window.requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)}}();
@@ -394,11 +399,10 @@ var Fireworks = function(){
 	
 	self.init();
   
-  var initialLaunchCount = 10;
-    setInterval(function(){
+	fireworkInterval = setInterval(function(){
  		self.fireworks.push(new Firework(self.cw/2, self.ch, rand(50, self.cw-50), rand(50, self.ch/2)-50));
-    }, initialLaunchCount);
-	
+    }, 25);
+
 }
 
 /*=============================================================================*/	
