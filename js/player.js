@@ -10,14 +10,14 @@
     };
     
     Player.prototype = {
-        play: function(key) {
+        play: function(key, loop) {
             var index = this[key];
             
             if (index === "undefined") {
                 return false;
             }
             
-            return this._start(index);
+            return this._start(index, loop);
         },
         
         pause: function(key) {
@@ -40,7 +40,7 @@
             return this._stop(index);
         },
         
-        _start: function(index) {
+        _start: function(index, loop) {
             // kill if playing first
             if (this._isPlaying(index)) {
                 this._stop(index);
@@ -49,6 +49,11 @@
             this.playing[index] = new Audio(this.sounds[index]);
             this.playing[index].controls = false;
             this.playing[index].autoplay = true;
+            
+            if (loop) {
+                this.playing[index].loop = true;
+            }
+            
             document.body.appendChild(this.playing[index]);
             
             return true;
