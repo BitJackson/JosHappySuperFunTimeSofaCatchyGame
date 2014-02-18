@@ -54,6 +54,10 @@ function init() {
             hand.x = 20;
             hand.y = stage.canvas.height - 140;
         };
+        
+        $('#gameover').click(function() {
+            window.location.reload();
+        });
 
 	createjs.Ticker.on("tick", tick);
 	createjs.Ticker.useRAF = true;
