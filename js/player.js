@@ -16,7 +16,7 @@
             100: 'assets/audio/ring.mp3',
             101: 'assets/audio/miss.mp3',
             // Menu sounds
-            200: 'assets/audio/livving-here.mp3'
+            200: 'assets/audio/living-here.mp3'
         };
         
         this.playing = {};
@@ -83,9 +83,7 @@
         
         _start: function(index, loop) {
             // kill if playing first
-            if (this._isPlaying(index)) {
-                this._stop(index);
-            }
+            this._stop(index);
             
             this.playing[index] = new Audio(this.sounds[index]);
             this.playing[index].controls = false;
@@ -107,10 +105,11 @@
         },
         
         _stop: function(index) {
-            this.playing[index].pause();
-            document.body.removeChild(this.playing[index]);
-            delete this.playing[index];
-            
+            if (this._isPlaying(index)) {
+                this.playing[index].pause();
+                document.body.removeChild(this.playing[index]);
+                delete this.playing[index];
+            }
             return true;
         },
         

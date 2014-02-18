@@ -280,5 +280,7 @@ function gameOver() {
     getLeaderboard();
     player.stop('BACKGROUND_MUSIC');
     player.stop('TURBO_MUSIC');
-    player.play('GAME_OVER');
+    setTimeout(function() {
+        player.play('GAME_OVER');
+    }, 500)
 }
