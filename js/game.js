@@ -88,12 +88,12 @@ function tick(event) {
 			imgWidth = 167;
 			imgHeight = 200;
 
-		} else if(rand2 >= 40 && rand2 < 60) {
+		} else if(rand2 >= 40 && rand2 < 50) {
 			image.src = "assets/images/mug.png";
 			imgWidth = 119;
 			imgHeight = 119;
 
-		} else if(rand2 >= 60 && rand2 < 80) {
+		} else if(rand2 >= 50 && rand2 < 75) {
 			image.src = "assets/images/wine.png";
 			imgWidth = 62;
 			imgHeight = 201;
@@ -124,6 +124,12 @@ function tick(event) {
 		} else {
 			bmpAnimation.isBooze = false;
 		}
+
+		if(rand2 >= 40 && rand2 < 50) {
+			bmpAnimation.givesLife = true;
+		} else {
+			bmpAnimation.givesLife = false;
+		}
 		collidables.push(bmpAnimation);
 		stage.addChild(bmpAnimation);
 	}
@@ -152,6 +158,10 @@ function tick(event) {
 				if(!isTurbo && !isDrunk) {
 					streak++;
 					setStreak(streak);
+				}
+
+				if(collidable.givesLife && health < 100) {
+					health += 5;
 				}
 			}
 			//console.log('collided');
