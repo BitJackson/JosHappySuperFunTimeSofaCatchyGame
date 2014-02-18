@@ -15,7 +15,7 @@ var gameOverVar = 0;
 var isDrunk = 0;
 var drunkModeInterval;
 
-//Turbo mode shit
+//Turbo mode shit0
 var isTurbo = 0;
 var turboModeInterval;
 
@@ -55,7 +55,7 @@ function init() {
             hand.y = stage.canvas.height - 140;
         };
 
-	createjs.Ticker.on("tick",tick);
+	createjs.Ticker.on("tick", tick);
 	createjs.Ticker.useRAF = true;
 	createjs.Ticker.setFPS(60);
         
@@ -176,7 +176,6 @@ function tick(event) {
 						setHealth(health);
 					}
 				}
-				//console.log('collided');
 			}
 
 			if (collidable.y >= stage.canvas.height) {
@@ -204,11 +203,6 @@ function tick(event) {
 				}
 			}
 		}
-
-		/*
-		for (var i = 0; i < indicesToRemove.length; i++) {
-			collidables.splice(indicesToRemove[i],1);
-		}*/
 	        
 	    if (streak == 10 && !isTurbo) {
 	    	console.log('turning on turbo');
@@ -227,7 +221,7 @@ function tick(event) {
 	        //Fire drunk mode
 	    }
 	} else {
-		//Do nothing		
+		event.remove();
 	}
 }
 
@@ -291,5 +285,7 @@ function gameOver() {
 	postScore();
     player.stop('BACKGROUND_MUSIC');
     player.stop('TURBO_MUSIC');
-    player.play('GAME_OVER');
+    setTimeout(function() {
+        player.play('GAME_OVER');
+    }, 500)
 }

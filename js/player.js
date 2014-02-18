@@ -5,16 +5,18 @@
     var Player = function() {
         this.BACKGROUND_MUSIC = 1;
         this.INTRO_MUSAK = 2;
-        
+        this.COLLECT = 100;
+        this.MISS = 101;
         this.GAME_OVER = 200;
         
         this.sounds = {
             1: 'assets/audio/getlucky.mp3',
             2: 'assets/audio/elevator.mp3',
             // In game sounds
-            
+            100: 'assets/audio/ring.mp3',
+            101: 'assets/audio/miss.mp3',
             // Menu sounds
-            200: 'assets/audio/bawk.mp3'
+            200: 'assets/audio/living-here.mp3'
         };
         
         this.playing = {};
@@ -56,13 +58,13 @@
         fadeUp: function(key, volume) {
             var index = this._index(key);
             
-            this.playing[index].volume += volume;
+            this.playing[index].volume = volume;
         },
         
         fadeDown: function(key, volume) {
             var index = this._index(key);
             
-            this.playing[index].volume -= volume;
+            this.playing[index].volume = volume;
         },
         
         stop: function(key) {
@@ -81,9 +83,7 @@
         
         _start: function(index, loop) {
             // kill if playing first
-            if (this._isPlaying(index)) {
-                this._stop(index);
-            }
+            this._stop(index);
             
             this.playing[index] = new Audio(this.sounds[index]);
             this.playing[index].controls = false;
@@ -105,10 +105,11 @@
         },
         
         _stop: function(index) {
-            this.playing[index].pause();
-            document.body.removeChild(this.playing[index]);
-            delete this.playing[index];
-            
+            if (this._isPlaying(index)) {
+                this.playing[index].pause();
+                document.body.removeChild(this.playing[index]);
+                delete this.playing[index];
+            }
             return true;
         },
         
