@@ -4,6 +4,11 @@ function addPoints(points) {
 	score.html('<h1>' + scoreVal + '</h1>');
 }
 
+function setStreak(streakVal) {
+	var streak = $("#streak");
+	streak.css('width',streakVal * 10 + '%');
+}
+
 function getLeaderboard() {
 	$.ajax({
 		url: 'http://jacksonwillis.com:3000/scores',
