@@ -31,7 +31,7 @@ function getLeaderboard() {
 		    // console.log(data);		
 		    for (index = 0; index < data.length; ++index) {
 		    	// console.log(data[index].name+" - "+data[index].score);
-			    $("#scoreboard").append( "<li>"+data[index].name+" - "+data[index].score+"</li>" );
+			    $("#leaderboard").append( "<li>"+data[index].name+" - "+data[index].score+"</li>" );
 			}
 		}
 	});

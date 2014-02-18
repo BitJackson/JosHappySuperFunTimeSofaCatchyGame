@@ -276,6 +276,7 @@ function convertRange( value, r1, r2 ) {
 }
 
 function gameOver() {
+	postScore();
 	getLeaderboard();
     player.stop('BACKGROUND_MUSIC');
     player.stop('TURBO_MUSIC');

@@ -9,6 +9,9 @@ html, body {
 body.turbo {
     background: red;
 }
+.clear {
+    clear:both;
+}
 
 #gameover {
     display: none; /* REMOVE ME */
@@ -31,6 +34,14 @@ body.turbo {
 #gameover h1, #gameover h2 {
     width: 100%;
     text-align: center;
+}
+#gameover ul {
+    width: 100%;
+}
+#gameover li {
+    width: 50%;
+    display: inline-block;
+    float: left;
 }
 
 #startGame {
