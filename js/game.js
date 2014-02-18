@@ -160,6 +160,9 @@ function tick(event) {
 	}*/
         
     if (streak == 10 && !isTurbo) {
+    	if(drunk == 10) {
+    		drunk = 9;
+    	}
         toasty.toastIt();
         turboModeOn();
         //Fire super mode
