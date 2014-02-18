@@ -29,12 +29,12 @@ function getLeaderboard() {
 	});
 }
 
-function postScore(name) {
+function postScore() {
 	$.ajax({
 		url: 'http://jacksonwillis.com:3000/score',
 		type: "POST",
 		contentType: "application/json",
-		data : '{"score":"'+$("#score").text()+'","name":"'+name+'", "health":"'+10+'", "streak":"'+10+'", "drunk":"'+10+'"}',
+		data : '{"score":"'+$("#score").text()+'","name":"'+name+'", "health":"'+10+'", "streak":"'+streak+'", "drunk":"'+drunk+'"}',
 		success: function (data) {
 		    console.log(data);
 		}

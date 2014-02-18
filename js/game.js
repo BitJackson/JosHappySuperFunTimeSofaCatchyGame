@@ -5,6 +5,8 @@ var controller;
 var handPosition = 0;
 var streak = 0;
 var drunk = 0;
+var name = 'Player1';
+var health = 100;
 var frequency = 1; //Number of collidables to spawn (% probability on each tick);
 
 
