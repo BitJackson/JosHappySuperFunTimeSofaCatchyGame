@@ -14,6 +14,11 @@ function setDrunk(drunkVal) {
 	streak.css('width',drunkVal * 10 + '%');
 }
 
+function setHealth(healthVal) {
+	var health = $("#health");
+	health.css('width',healthVal + '%');
+}
+
 function getLeaderboard() {
 	$.ajax({
 		url: 'http://jacksonwillis.com:3000/scores',

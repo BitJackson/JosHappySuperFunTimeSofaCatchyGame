@@ -163,12 +163,19 @@ function tick(event) {
 				collidable.hasCollided = true;
 				stage.removeChild(collidable);
 				indicesToRemove.push(i);
+				health = health - 5;
+				setHealth(health);
+
+				if(health == 0) {
+					gameOver();
+					return;
+				}
 				
 				if(!isTurbo) {
 					streak = 0;
 					setStreak(streak);
 				}
-			}	
+			}
 		}
 	}
 
@@ -195,6 +202,7 @@ function tick(event) {
         //Fire drunk mode
     }
 }
+
 
 function setupLeap() {
 
@@ -251,6 +259,7 @@ function convertRange( value, r1, r2 ) {
 }
 
 function gameOver() {
+	alert('You be dead');
     player.stop('BACKGROUND_MUSIC');
     player.stop('TURBO_MUSIC');
     player.play('GAME_OVER');
