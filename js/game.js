@@ -22,6 +22,7 @@ var turboModeInterval;
 $('#startGame').click(function() {
 	if ($('#player').val().match(/\S/)) {
 		$('#intro').toggle();
+                player.play('BACKGROUND_MUSIC', true);
 		init();
 	} else {
 		alert('You must enter a name');
@@ -181,6 +182,7 @@ function tick(event) {
     		drunk = 9;
     	}
         toasty.toastIt();
+        isTurbo = false;
         turboModeOn();
         //Fire super mode
     }
