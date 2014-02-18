@@ -66,16 +66,21 @@ function tick(event) {
 
 		var spriteSheet;
 
-		if(rand2 < 25) {
+		if(rand2 < 20) {
 			image.src = "assets/images/laptop.png";
 			imgWidth = 200;
 			imgHeight = 191;
-		} else if(rand2 >= 25 && rand2 < 50) {
+		} else if(rand2 >= 20 && rand2 < 40) {
 			image.src = "assets/images/cat.png";
 			imgWidth = 167;
 			imgHeight = 200;
 
-		} else if(rand2 >= 50 && rand2 < 75) {
+		} else if(rand2 >= 40 && rand2 < 60) {
+			image.src = "assets/images/mug.png";
+			imgWidth = 119;
+			imgHeight = 119;
+
+		} else if(rand2 >= 60 && rand2 < 80) {
 			image.src = "assets/images/wine.png";
 			imgWidth = 62;
 			imgHeight = 201;
@@ -101,7 +106,7 @@ function tick(event) {
 		bmpAnimation.y = 0;
 
 		bmpAnimation.currentFrame = 0;
-		if(rand2 >= 50) {
+		if(rand2 >= 60) {
 			bmpAnimation.isBooze = true;
 		} else {
 			bmpAnimation.isBooze = false;
