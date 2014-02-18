@@ -45,7 +45,7 @@
             toasty.audio.play();
 
             setTimeout(function() {
-                player.fadeUp('BACKGROUND_MUSIC', 0.7);
+                player.fadeUp('BACKGROUND_MUSIC', 1);
             }, 1000);
         }
     };

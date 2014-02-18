@@ -25,8 +25,8 @@ body.turbo {
     background-size: 100% 100%;
 }
 #gameover .container {
-    width: 70%;
-    margin: 350px 15% 0 15%;
+    width: 60%;
+    margin: 50px 20% 0 20%;
     background-color: rgba(225, 225, 225, 0.5);
     display: block;
     padding: 20px;
@@ -35,6 +35,17 @@ body.turbo {
     width: 100%;
     text-align: center;
 }
+
+#gameover h3 {
+    width: 60%;
+    margin: 20px auto 0;
+    color: #fff;
+    text-align: center;
+    font-size: 28px;
+    line-height: 35px;
+    text-transform: uppercase;
+}
+
 #gameover ul {
     width: 100%;
 }
